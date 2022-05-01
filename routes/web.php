@@ -39,7 +39,7 @@ Route::POST('categories/getCategory', 'CategoryController@getCategory')->name('g
 Route::POST('categories/updateCategory', 'CategoryController@updateCategory')->name('updateCategory');
 Route::POST('categories/deleteCategory', 'CategoryController@deleteCategory')->name('deleteCategory');
 Route::POST('categories/newCategory', 'CategoryController@newCategory')->name('category.newCategory');
-Route::get('test', 'CategoryController@test');
+
 
 
 Route::get('users', 'UserController@index')->name('users');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\models\ProductCategory;
 
 class CategoryController extends Controller
 {
@@ -112,10 +113,17 @@ class CategoryController extends Controller
     public function deleteCategory(Request $request)
     {
         $id = $request->categoryId;
+        $check_gategory = ProductCategory::find($id)
+                            ->select('product_id')
+                            ->get()
+                            ->toArray();
 
-        $category = Category::find($id);
-        $category->delete();
-                           
+        if(count($check_gategory) > 0 ){
+            return false; 
+        }else{
+            $category = Category::find($id);
+            $category->delete();
+        }                  
 
         return back()->with('success', 'category Delete!');
     }

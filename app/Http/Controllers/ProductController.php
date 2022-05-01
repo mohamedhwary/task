@@ -176,6 +176,7 @@ class ProductController extends Controller
             $product = ProductCategory::create([
                 'product_id' =>$lastId,
                 'category_id'=>$id,
+
             ]);
             
         }

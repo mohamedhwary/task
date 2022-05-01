@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Hash;
@@ -117,9 +118,14 @@ class UserController extends Controller
     public function deleteUser(Request $request)
     {
         $id = $request->userId;
-
-        $user = User::find($id);
-        $user->delete();
+        $check_product = Product::where('user_id' ,$id )->get()->toArray();
+        if(count($check_product) > 0){
+            return false;
+        }else{
+            $user = User::find($id);
+            $user->delete();
+        }
+        
                            
 
         return back()->with('success', 'User Delete!');
