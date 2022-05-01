@@ -50,6 +50,7 @@ class CategoryController extends Controller
         // Fetch records
         $records = Category::orderBy($columnName,$columnSortOrder)
         ->where('.name', 'like', '%' .$searchValue . '%')
+        ->with('products')
         ->select('*')
         ->skip($start)
         ->take($rowperpage)
@@ -60,12 +61,15 @@ class CategoryController extends Controller
         foreach($records as $record){
             $id = $record->id;
             $name = $record->name;
-            $assign=$record->assign;
+            $assign=$record->products->count();
             
             $data_arr[] = array(
             "id" => $id,
             "name" => $name,
             "assign"=>$assign,
+            "actions" => "<button  data-id='".$id."' class='btn' onclick='updateCategory({$id})' ><i class='fa fa-edit' aria-hidden='true'></i></button>
+            <button  data-id='".$id."' class='btn ' onclick='deleteCategory({$id})'><i class='fa fa-trash' aria-hidden='true'></i>
+            </button>",
             );
         }
         $response = array(
@@ -79,4 +83,54 @@ class CategoryController extends Controller
         exit;
         
     }
+    public function create(Request $request)
+    {
+        return view('createCategory');
+    }
+    public function getCategory(Request $request)
+    {
+
+        $id = $request->id;
+        $category = Category::find($id);
+
+        return $category;
+    }
+
+    public function updateCategory(Request $request)
+    {
+        $id = $request->categoryId;
+
+        $category = Category::where('id', $id)
+                            ->update([
+                                'name'=>$request->name,
+                            ]);
+                           
+
+        return back()->with('success', 'category Updated!');
+    }
+
+    public function deleteCategory(Request $request)
+    {
+        $id = $request->categoryId;
+
+        $category = Category::find($id);
+        $category->delete();
+                           
+
+        return back()->with('success', 'category Delete!');
+    }
+
+    public function newCategory(Request $request)
+    {
+         $request->validate([
+            'category' => 'required|min:3|max:255'
+        ]);
+        $category = Category::create([
+            'name' =>$request->category,
+        ]);
+                           
+
+        return redirect()->back()->with('success','Category created successfully');
+    }
+
 }

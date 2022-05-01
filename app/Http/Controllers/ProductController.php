@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
+use App\models\ProductCategory;
 use Illuminate\Http\Request;
 
 
@@ -42,6 +44,7 @@ class ProductController extends Controller
 
         $columnIndex = $columnIndex_arr[0]['column']; // Column index
         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+
         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
         $searchValue = $search_arr['value']; // Search value
 
@@ -67,6 +70,7 @@ class ProductController extends Controller
             $quantity = $record->quantity;
             $price = $record->price;
             $user_id = $record->users->name;
+            $updated_at	 = $record->updated_at;
 
             $data_arr[] = array(
             "id" => $id,
@@ -75,6 +79,7 @@ class ProductController extends Controller
             "quantity" => $quantity,
             "price" => $price,
             "user_id" => $user_id,
+            "updated_at" =>date("d-m-Y",strtotime($updated_at)),
             "actions" => "<input type='button' value='remove quantity' data-id='".$id."' class='btn btn-danger remove_qu' onclick='removeQunt({$id})'>
             <button  data-id='".$id."' class='btn'onclick='updateProduct({$id})' ><i class='fa fa-edit' aria-hidden='true'></i></button>
             <button  data-id='".$id."' class='btn  remove_qu' onclick='deleteProduct({$id})'><i class='fa fa-trash' aria-hidden='true'></i>
@@ -92,7 +97,11 @@ class ProductController extends Controller
         exit;
         
     }
-
+    public function create(Request $request)
+    {
+        $category = Category::all();
+        return view('createProduct' , ['category' => $category]);
+    }
     public function removeQuantity(Request $request)
     {
         $id = $request->id;
@@ -143,7 +152,15 @@ class ProductController extends Controller
 
     public function newProduct(Request $request)
     {
+        
         $id = auth()->user()->id;
+        $request->validate([
+            'name' => 'required|min:3|max:255',
+            'category' => "required|array|min:1",
+            'qty'   =>'required|numeric|min:0|not_in:0',
+            'price' =>"required|gt:0"
+        ]);
+
         $product = product::create([
             'name' =>$request->name,
             'description'=>$request->desc,
@@ -151,8 +168,21 @@ class ProductController extends Controller
             'price'=>$request->price,
             'user_id'=>$id
         ]);
+
+        $product->save();
+        $lastId = $product->id;
+
+        foreach($request->category as $id){
+            $product = ProductCategory::create([
+                'product_id' =>$lastId,
+                'category_id'=>$id,
+            ]);
+            
+        }
+        
+        
                            
 
-        return back()->with('success', 'Product Delete!');
+        return redirect()->back()->with('success','Product created successfully');
     }
 }

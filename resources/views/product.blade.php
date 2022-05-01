@@ -10,8 +10,8 @@
                             <h6 class="text-white text-capitalize ps-3">Products table</h6>
                         </div>
                         <div class="col-6" style="text-align: right;">
-                            <button  class='btn btn-light' id='newProductbtn'><i class='fa fa-plus' aria-hidden='true'></i>
-                            </button>
+                            <a href="{{ route('products.create') }}"  class='btn btn-light' ><i class='fa fa-plus' aria-hidden='true'></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -36,6 +36,9 @@
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Create By</th>
+                                      <th
+                                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                      updated at</th>
                                     <th class="text-secondary opacity-7">Action</th>
                                 </tr>
                             </thead>
@@ -48,7 +51,7 @@
         </div>
     </div>
     <!-- Modal edit -->
-<div class="modal fade" id="editModel" tabindex="-1" role="dialog" aria-labelledby="editModel" aria-hidden="true">
+<div class="modal fade" id="editModel" tabindex="-1" role="dialog" aria-labelledby="editModel" aria-hidden="true" style="height: fit-content;">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -76,7 +79,7 @@
 
 
   <!-- Modal delete -->
-<div class="modal fade" id="deleteProduct" tabindex="-1" role="dialog" aria-labelledby="deleteProduct" aria-hidden="true">
+<div class="modal fade" id="deleteProduct" tabindex="-1" role="dialog" aria-labelledby="deleteProduct" aria-hidden="true" style="height: fit-content;">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -95,43 +98,5 @@
       </div>
     </div>
   </div>
-<!-- Modal new product -->
-<div class="modal fade" id="newProduct" tabindex="-1" role="dialog" aria-labelledby="deleteProduct" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editModel">Add New Product</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="newname" placeholder="Example input">
-              </div>
-              <div class="form-group">
-                <label for="desc">description</label>
-                <input type="text" class="form-control" id="newdesc" placeholder="Another input">
-              </div>
-              <div class="form-group">
-                <label for="qty">Quantity </label>
-                <input type="text" class="form-control" id="newqty" placeholder="Example input">
-              </div>
-              <div class="form-group">
-                <label for="price">price</label>
-                <input type="text" class="form-control" id="newprice" placeholder="Another input">
-              </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-danger" id="addNewProduct">Save</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
 
 @endsection

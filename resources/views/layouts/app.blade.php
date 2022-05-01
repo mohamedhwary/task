@@ -25,7 +25,8 @@
     <!-- Datatables CSS CDN -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/css/bootstrap-modal-bs3patch.css" />
-
+    <!-- select 2 cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 
 
@@ -35,7 +36,7 @@
 
 <body class="g-sidenav-show  bg-gray-200">
     @guest
-        <div class="container-fluid">
+        <div class="">
         @else
             @include('layouts.sideBar')
             @include('layouts.navBar')
@@ -49,7 +50,6 @@
                 @yield('content')
 
             </div>
-
         </div>
         {{-- <script href="{{ asset('js/app.js') }}" rel="stylesheet" ></script> --}}
         <!--   Core JS Files   -->
@@ -72,6 +72,8 @@
         <!-- custom JS -->
         <script src="{{ asset('assets/js/custom.js') }}" type="text/javascript"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modalmanager.min.js"></script>
+         <!-- select2 cdn jquery JS -->
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 </body>
 
