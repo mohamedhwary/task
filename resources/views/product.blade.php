@@ -10,7 +10,8 @@
                             <h6 class="text-white text-capitalize ps-3">Products table</h6>
                         </div>
                         <div class="col-6" style="text-align: right;">
-                            <a href="{{ route('products.create') }}"  class='btn btn-light' ><i class='fa fa-plus' aria-hidden='true'></i>
+                            <a href="{{ route('products.create') }}" class='btn btn-light'><i class='fa fa-plus'
+                                    aria-hidden='true'></i>
                             </a>
                         </div>
                     </div>
@@ -36,9 +37,9 @@
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Create By</th>
-                                      <th
-                                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                      updated at</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        updated at</th>
                                     <th class="text-secondary opacity-7">Action</th>
                                 </tr>
                             </thead>
@@ -51,52 +52,69 @@
         </div>
     </div>
     <!-- Modal edit -->
-<div class="modal fade" id="editModel" tabindex="-1" role="dialog" aria-labelledby="editModel" aria-hidden="true" style="height: fit-content;">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editModel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <input type="hidden" class="form_controls" id = "porductId">
+    <div class="modal fade" id="editModel" tabindex="-1" role="dialog" aria-labelledby="editModel" aria-hidden="true"
+        style="height: fit-content;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" class="form_controls" id="porductId">
 
-          <input type="text" class="form_controls" id = "name">
-          <input type="text" class="form_controls" id = "desc">
-          <input type="text" class="form_controls" id = "qty">
-          <input type="text" class="form_controls" id = "price">
-          
+                    <div class="form-group">
+                        <label for="Name">Name</label>
+                        <input type="text" class="form-control" name="Name" id="Name" aria-describedby="Name"
+                            style="border: groove;">
+                    </div>
+                    <div class="form-group">
+                      <label for="desc">description</label>
+                      <input type="text" class="form-control" name="desc" id="desc" aria-describedby="Name"
+                          style="border: groove;">
+                  </div>
+                  <div class="form-group">
+                    <label for="price">price</label>
+                    <input type="text" class="form-control" name="price" id="price" aria-describedby="price"
+                        style="border: groove;">
+                </div>
+                <div class="form-group">
+                  <label for="qty">quantity</label>
+                  <input type="text" class="form-control" name="qty" id="qty" aria-describedby="qty"
+                      style="border: groove;">
+              </div>
+                  
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveChangeProduct">Save changes</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="saveChangeProduct">Save changes</button>
-        </div>
-      </div>
     </div>
-  </div>
 
 
-  <!-- Modal delete -->
-<div class="modal fade" id="deleteProduct" tabindex="-1" role="dialog" aria-labelledby="deleteProduct" aria-hidden="true" style="height: fit-content;">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editModel">Are you sure for delete</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+    <!-- Modal delete -->
+    <div class="modal fade" id="deleteProduct" tabindex="-1" role="dialog" aria-labelledby="deleteProduct"
+        aria-hidden="true" style="height: fit-content;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModel">Are you sure for delete</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" class="form_controls" id="porductId">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" id="deleteProductBtn">Delete</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <input type="hidden" class="form_controls" id = "porductId">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-danger" id="deleteProductBtn">Delete</button>
-        </div>
-      </div>
     </div>
-  </div>
-
 @endsection
